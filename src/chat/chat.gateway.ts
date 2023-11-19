@@ -13,9 +13,12 @@ import { Server, Socket } from 'socket.io';
 export class ChatGateway {
   @WebSocketServer()
   server: Server;
+  messages: string[] = [];
 
   @SubscribeMessage('events')
   handleEvent(@MessageBody() data: string): string {
+    this.messages.push(data);
+    this.server.emit('events', data);
     return data;
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
