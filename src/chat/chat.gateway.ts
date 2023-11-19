@@ -23,12 +23,10 @@ export class ChatGateway {
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   handleConnection(client: Socket, ...args: any[]) {
-    const cookies = client.handshake.headers;
-
-    console.log(cookies);
+    // const cookies = client.handshake.headers;
   }
 
-  afterInit(server: any) {
-    console.log('GatewayInfos: ', server);
+  afterInit(_server: any) {
+    console.log('init');
   }
 }
