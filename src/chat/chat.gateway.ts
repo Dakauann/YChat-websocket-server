@@ -34,16 +34,13 @@ export class ChatGateway {
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async handleConnection(client: Socket, ...args: any[]) {
-    // TODO: FIx user authentication (pass user id from the client)
-    const cookies = client.handshake.headers.cookie;
-    const serializedCookies = cookies.split(';').reduce((acc, cookie) => {
-      const [key, value] = cookie.split('=');
-      return {
-        ...acc,
-        [key.trim()]: value,
-      };
-    }, {});
-    console.log(serializedCookies);
+    const id = client.handshake.auth.id;
+    if (!id) return client.disconnect(true);
+
+    const user = await this.chatsService.getUser(id);
+    if (user == null) return client.disconnect(true);
+
+    console.log('User can be maintained connected');
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

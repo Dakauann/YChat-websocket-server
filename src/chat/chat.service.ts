@@ -1,3 +1,4 @@
+import { KindeUser } from '@kinde-oss/kinde-auth-pkce-js';
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 
@@ -25,17 +26,22 @@ export class ChatService {
       token_type: string;
     };
   }
-  async getUser() {
+  async getUser(id: string): Promise<KindeUser> {
+    const headers = {
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + process.env.KINDE_API_AUTHORIZATION,
+    };
     const response = await axios.get(
-      'https://dakauann.kinde.com/api/v1/users',
+      'https://dakauann.kinde.com/api/v1/user?id=' + id,
       {
-        headers: {
-          Accept: 'application/json',
-          Authorization: 'Bearer ' + (await this.getToken()).access_token,
-        },
+        headers: headers,
       },
     );
 
-    console.log(response.data);
+    if (response.status !== 200) {
+      return null;
+    }
+
+    return response.data;
   }
 }
