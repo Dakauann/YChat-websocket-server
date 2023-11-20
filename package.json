@@ -20,13 +20,19 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@kinde-oss/kinde-auth-pkce-js": "^3.0.26",
+    "@kinde-oss/kinde-nodejs-sdk": "^1.2.3",
     "@kinde-oss/kinde-typescript-sdk": "^2.3.0",
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/platform-socket.io": "^10.2.9",
     "@nestjs/websockets": "^10.2.9",
+    "axios": "^1.6.2",
+    "querystring": "^0.2.1",
     "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
     "rxjs": "^7.8.1",
     "socket.io": "^4.7.2"
   },
